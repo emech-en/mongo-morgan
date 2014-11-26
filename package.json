@@ -1,0 +1,49 @@
+{
+  "name": "mongo-morgan",
+  "version": "1.0.0",
+  "description": "This is a morgan module saves logs to mongodb database",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:emech-en/mongo-morgan.git"
+  },
+  "dependencies": {
+    "morgan": "1.5.0",
+    "carrier": "0.1.14",
+    "mongodb": "1.4.22"
+  },
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "morgan",
+    "express",
+    "log",
+    "logger",
+    "httplogger",
+    "http"
+  ],
+  "author": "Emech En <mh.niroomand91@gmail.com> (http://www.emech.ir/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emech-en/mongo-morgan/issues"
+  },
+  "homepage": "https://github.com/emech-en/mongo-morgan",
+  "devDependencies": {
+    "istanbul": "0.3.2",
+    "mocha": "~2.0.0",
+    "supertest": "~0.14.0"
+  },
+  "files": [
+    "LICENSE",
+    "HISTORY.md",
+    "index.js"
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "mocha --check-leaks --reporter spec --bail",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --check-leaks --reporter dot",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --check-leaks --reporter spec"
+  }
+}
