@@ -9,10 +9,10 @@ This is build upon [morgan](https://github.com/expressjs/morgan) module which sa
 ## API
 
 ```js
-var mongo-morgan = require('mongo-morgan')
+var mongoMorgan = require('mongo-morgan')
 ```
 
-### morgan(mongodburl, format, options)
+### mongoMorgan(mongodburl, format, options)
 
 Create a new mongo-morgan logger middleware function using the given `mongodburl`, `format` and `options`.
 The `mongodburl` is required and is connection string to mongodb
@@ -29,14 +29,14 @@ Save logs to the given collection in mongodb. defaults to `requests`.
 
 ```js
 // EXAMPLE: save logs to logs collection
-morgan('url', 'combined', {
+mongoMorgan('url', 'combined', {
   collection: 'logs'
 })
 ```
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/mongo-morganmorgan.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/mongo-morgan.svg?style=flat
 [npm-url]: https://npmjs.org/package/mongo-morgan
 [travis-image]: https://img.shields.io/travis/emech-en/mongo-morgan.svg?style=flat
 [travis-url]: https://travis-ci.org/emech-en/mongo-morgan
