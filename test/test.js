@@ -5,10 +5,15 @@ var http = require('http');
 var morgan = require('..');
 var request = require('supertest');
 var MongoClient = require('mongodb');
-var MONGODB_URL = 'mongodb://admin:123456@emech-Aspire-5738:27000/morgantest?authSource=admin';
+var MONGODB_URL = process.env.db
 var COLLECTION = 'request';
 var mongoCollection = null
 var lastLogLine;
+
+if (!MONGODB_URL) {
+  console.log('no db connection string');
+  process.exit(1)
+}
 
 function saveLastLogLine(line) {
   lastLogLine = line;
@@ -83,6 +88,7 @@ function noopMiddleware(req, res, next) {
 
 
 describe('logger()', function() {
+  this.timeout(50000)
 
   beforeEach(function(done) {
     function onConnect(error, mongoDb) {
