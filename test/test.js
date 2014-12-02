@@ -27,7 +27,7 @@ function getLastLog(next, count) {
       if (error)
         return next(error)
       if (!log)
-        if (count < 50)
+        if (count < 1000)
           return getLastLog(next, count + 1)
         else
           return next('no log')
