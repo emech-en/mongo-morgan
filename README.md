@@ -34,6 +34,10 @@ mongoMorgan('url', 'combined', {
 })
 ```
 
+## To Do
+- [ ] Save logs as objects.
+
+## License
 [MIT](LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/mongo-morgan.svg?style=flat
