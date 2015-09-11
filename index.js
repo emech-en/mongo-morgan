@@ -85,3 +85,8 @@ function mongoMorgan(mongodbUrl, format, options) {
 
   return morgan.apply(null, args)
 }
+
+module.exports.token = function(name, fn) {
+  return morgan.token(name, fn);
+};
+

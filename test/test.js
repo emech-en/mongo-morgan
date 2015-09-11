@@ -619,6 +619,30 @@ describe('logger()', function() {
         })
       })
     })
+
+    describe('custom', function(){
+      before(function(){
+        morgan.token('customToken', function(){
+          return 'valueOfCustomToken';
+        });
+      });
+
+
+      it('should get custom token', function(done) {
+        var server = createServer(':customToken');
+
+        request(server)
+            .get('/')
+            .end(function(err, res) {
+              if (err) return done(err)
+              getLastLog(function(error, lastLogLine) {
+                if (error) return done(error)
+                assert.equal(lastLogLine, 'valueOfCustomToken')
+                done()
+              })
+            })
+      })
+    })
   })
 
   describe('formats', function() {
