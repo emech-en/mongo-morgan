@@ -90,3 +90,6 @@ module.exports.token = function(name, fn) {
   return morgan.token(name, fn);
 };
 
+module.exports.format = function(name, fmt) {
+  return morgan.format(name, fmt);
+};

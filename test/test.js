@@ -822,6 +822,28 @@ describe('logger()', function() {
           })
       })
     })
+
+    describe('custom', function(){
+      before(function(){
+        morgan.format('customFormat', 'valueOfCustomFormat');
+      });
+
+
+      it('should get custom format', function(done) {
+        var server = createServer('customFormat');
+
+        request(server)
+            .get('/')
+            .end(function(err, res) {
+              if (err) return done(err)
+              getLastLog(function(error, lastLogLine) {
+                if (error) return done(error)
+                assert.equal(lastLogLine, 'valueOfCustomFormat')
+                done()
+              })
+            })
+      })
+    })
   })
 
   // describe('with buffer option', function() {
