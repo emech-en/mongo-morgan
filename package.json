@@ -1,6 +1,6 @@
 {
   "name": "mongo-morgan",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "This is a morgan module saves logs to mongodb database",
   "main": "index.js",
   "repository": {
@@ -10,7 +10,7 @@
   "dependencies": {
     "morgan": "1.5.0",
     "carrier": "0.1.14",
-    "mongodb": "1.4.22"
+    "mongodb": "2.0.43"
   },
   "keywords": [
     "mongo",
