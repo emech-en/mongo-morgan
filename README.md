@@ -35,7 +35,8 @@ mongoMorgan('url', 'combined', {
 ```
 
 ## To Do
-- [ ] Save logs as objects.
+- [x] Save logs as objects.
+- [ ] Add documentation for saving logs as objects.
 
 ## License
 [MIT](LICENSE)
