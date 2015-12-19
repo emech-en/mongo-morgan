@@ -41,6 +41,8 @@ function mongoMorgan(mongodbUrl, format, options) {
   // mixin options
   options.stream = stream
 
+
+
   function onConnect(error, mongoDb) {
     if (error) {
       throw error
@@ -58,10 +60,24 @@ function mongoMorgan(mongodbUrl, format, options) {
   }
 
   function onLine(line) {
-    var entry = {
-      time: Date.now(),
-      request: line
+    function makeObjectEntry(line){
+      try {
+        var entry = JSON.parse(line);
+        return typeof entry === 'object' ? entry : undefined;
+      }
+      catch(ex) {
+        return;
+      }
     }
+
+    function makeTextEntry(line){
+      return {
+        time: Date.now(),
+            request: line
+      };
+    }
+
+    var entry = makeObjectEntry(line) || makeTextEntry(line);
 
     buffer.push(entry)
 
@@ -85,3 +101,11 @@ function mongoMorgan(mongodbUrl, format, options) {
 
   return morgan.apply(null, args)
 }
+
+module.exports.token = function(name, fn) {
+  return morgan.token(name, fn);
+};
+
+module.exports.format = function(name, fmt) {
+  return morgan.format(name, fmt);
+};

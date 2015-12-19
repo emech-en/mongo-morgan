@@ -5,7 +5,7 @@ var http = require('http');
 var morgan = require('..');
 var request = require('supertest');
 var MongoClient = require('mongodb');
-var MONGODB_URL = process.env.db
+var MONGODB_URL = 'mongodb://localhost/mongo-morgan-test';
 var COLLECTION = 'request';
 var mongoCollection = null
 var lastLogLine;
@@ -31,7 +31,7 @@ function getLastLog(next, count) {
           return getLastLog(next, count + 1)
         else
           return next('no log')
-      return next(null, log.request)
+      return next(null, log.request || log)
     })
   else
     return next('no mongo collection')
@@ -619,6 +619,30 @@ describe('logger()', function() {
         })
       })
     })
+
+    describe('custom', function(){
+      before(function(){
+        morgan.token('customToken', function(){
+          return 'valueOfCustomToken';
+        });
+      });
+
+
+      it('should get custom token', function(done) {
+        var server = createServer(':customToken');
+
+        request(server)
+            .get('/')
+            .end(function(err, res) {
+              if (err) return done(err)
+              getLastLog(function(error, lastLogLine) {
+                if (error) return done(error)
+                assert.equal(lastLogLine, 'valueOfCustomToken')
+                done()
+              })
+            })
+      })
+    })
   })
 
   describe('formats', function() {
@@ -796,6 +820,44 @@ describe('logger()', function() {
               done()
             })
           })
+      })
+    })
+
+    describe('custom', function(){
+      before(function(){
+        morgan.format('customFormat', 'valueOfCustomFormat');
+      });
+
+
+      it('should get custom format', function(done) {
+        var server = createServer('customFormat');
+
+        request(server)
+            .get('/')
+            .end(function(err, res) {
+              if (err) return done(err)
+              getLastLog(function(error, lastLogLine) {
+                if (error) return done(error)
+                assert.equal(lastLogLine, 'valueOfCustomFormat')
+                done()
+              })
+            })
+      })
+
+      it('should handle custom JSON format', function(done) {
+        var server = createServer('{"custom": {"format": "json"}}');
+
+        request(server)
+            .get('/')
+            .end(function(err, res) {
+              if (err) return done(err)
+              getLastLog(function(error, lastLogLine) {
+                if (error) return done(error)
+
+                assert.equal(JSON.stringify(lastLogLine.custom), '{"format":"json"}');
+                done()
+              })
+            })
       })
     })
   })
