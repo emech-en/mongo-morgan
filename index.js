@@ -77,7 +77,7 @@ function mongoMorgan(mongodbUrl, format, options) {
       };
     }
 
-    entry = makeObjectEntry(line) || makeTextEntry(line);
+    var entry = makeObjectEntry(line) || makeTextEntry(line);
 
     buffer.push(entry)
 
