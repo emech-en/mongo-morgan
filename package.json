@@ -10,7 +10,7 @@
   "dependencies": {
     "morgan": "1.5.0",
     "carrier": "0.1.14",
-    "mongodb": "2.0.43"
+    "mongodb": "^2.0.43"
   },
   "keywords": [
     "mongo",
