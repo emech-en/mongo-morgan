@@ -1,0 +1,23 @@
+version: "3"
+services:
+  test:
+    image: node:8.9.1-slim
+    container_name: mongo-morgan-test
+    user: node
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    entrypoint:
+      - ./test-entry-point.sh
+    links:
+      - mongodb
+    tty: true
+
+  mongodb:
+    image: mongo:3.4.10-jessie
+    container_name: mongo-morgan-test-db
+    volumes:
+      - ./data:/data/db
+    tty: false

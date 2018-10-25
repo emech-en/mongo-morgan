@@ -5,7 +5,7 @@ var http = require('http');
 var morgan = require('..');
 var request = require('supertest');
 var MongoClient = require('mongodb');
-var MONGODB_URL = 'mongodb://localhost/mongo-morgan-test';
+var MONGODB_URL = 'mongodb://mongodb/mongo-morgan-test';
 var COLLECTION = 'request';
 var mongoCollection = null
 var lastLogLine;
